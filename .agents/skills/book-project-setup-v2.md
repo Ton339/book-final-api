@@ -23,24 +23,25 @@ nest --version
 
 ## สารบัญ
 
-0. ภาพรวม: ERD, Sequence Diagram และการเก็บไฟล์
-1. วิธีติดตั้ง (สั้นๆ)
-2. สร้างโปรเจกต์ Backend
-3. ติดตั้ง package
-4. ใช้ Nest CLI gen โครงของ Book / Review / Tag / Uploads
-5. ตั้งค่า `main.ts` (CORS, Validation, Swagger)
-6. ตั้งค่า `app.module.ts` (TypeORM + SQLite)
-7. ตัวช่วยอัปโหลดไฟล์ (`upload.util.ts`)
-8. โมดูล Tag
-9. โมดูล Book (+ อัปโหลดปก)
-10. โมดูล Review (+ อัปโหลดรูป)
-11. โมดูล Uploads (ส่งไฟล์กลับให้ frontend)
-12. รัน และทดสอบ Backend
-13. Frontend (Next.js + Tailwind + src dir)
-14. Checklist ทดสอบทั้งระบบ + จุดที่มักพลาด
+0. [ภาพรวม: ERD, Sequence Diagram และการเก็บไฟล์](#step-0)
+1. [วิธีติดตั้ง (สั้นๆ)](#step-1)
+2. [สร้างโปรเจกต์ Backend](#step-2)
+3. [ติดตั้ง package](#step-3)
+4. [ใช้ Nest CLI gen โครงของ Book / Review / Tag / Uploads](#step-4)
+5. [ตั้งค่า `main.ts` (CORS, Validation, Swagger)](#step-5)
+6. [ตั้งค่า `app.module.ts` (TypeORM + SQLite)](#step-6)
+7. [ตัวช่วยอัปโหลดไฟล์ (`upload.util.ts`)](#step-7)
+8. [โมดูล Tag](#step-8)
+9. [โมดูล Book (+ อัปโหลดปก)](#step-9)
+10. [โมดูล Review (+ อัปโหลดรูป)](#step-10)
+11. [โมดูล Uploads (ส่งไฟล์กลับให้ frontend)](#step-11)
+12. [รัน และทดสอบ Backend](#step-12)
+13. [Frontend (Next.js + Tailwind + src dir)](#step-13)
+14. [Checklist ทดสอบทั้งระบบ + จุดที่มักพลาด](#step-14)
 
 ---
 
+<a id="step-0"></a>
 ## Step 0 ภาพรวม
 
 ### ERD (Mermaid)
@@ -313,6 +314,7 @@ frontend/                       (โครงสร้างเต็มดู S
 
 ---
 
+<a id="step-1"></a>
 ## Step 1 วิธีติดตั้ง (สั้นๆ)
 
 ```bash
@@ -328,6 +330,7 @@ nest --version
 
 ---
 
+<a id="step-2"></a>
 ## Step 2 สร้างโปรเจกต์ Backend
 
 ```bash
@@ -342,6 +345,7 @@ Nest CLI จะสร้าง `src/main.ts`, `app.module.ts`, `app.controller.t
 
 ---
 
+<a id="step-3"></a>
 ## Step 3 ติดตั้ง package
 
 ```bash
@@ -365,6 +369,7 @@ npm i -D @types/multer
 
 ---
 
+<a id="step-4"></a>
 ## Step 4 ใช้ Nest CLI gen โครงของแต่ละโมดูล
 
 ```bash
@@ -412,6 +417,7 @@ mkdir src/common
 
 ---
 
+<a id="step-5"></a>
 ## Step 5 `src/main.ts`
 
 ```ts
@@ -468,6 +474,7 @@ void bootstrap();
 
 ---
 
+<a id="step-6"></a>
 ## Step 6 `src/app.module.ts`
 
 ลบ `AppController` / `AppService` ออก ใส่ TypeORM
@@ -503,6 +510,7 @@ export class AppModule {}
 
 ---
 
+<a id="step-7"></a>
 ## Step 7 ตัวช่วยอัปโหลดไฟล์ `src/common/upload.util.ts`
 
 รวม logic อัปโหลดไว้ที่เดียว ใช้ซ้ำทั้งปกหนังสือและรูปรีวิว
@@ -600,6 +608,7 @@ export function deleteUploadedFile(url?: string | null) {
 
 ---
 
+<a id="step-8"></a>
 ## Step 8 โมดูล Tag
 
 ### 8.1 Entity — `src/tags/entities/tag.entity.ts`
@@ -773,6 +782,7 @@ export class TagsModule {}
 
 ---
 
+<a id="step-9"></a>
 ## Step 9 โมดูล Book (+ อัปโหลดปก)
 
 ### 9.1 Entity — `src/books/entities/book.entity.ts`
@@ -1045,6 +1055,7 @@ export class BooksModule {}
 
 ---
 
+<a id="step-10"></a>
 ## Step 10 โมดูล Review (+ อัปโหลดรูป)
 
 ### 10.1 Entity — `src/reviews/entities/review.entity.ts`
@@ -1284,6 +1295,7 @@ export class ReviewsModule {}
 
 ---
 
+<a id="step-11"></a>
 ## Step 11 โมดูล Uploads (ส่งไฟล์ดิบกลับให้ frontend ผ่าน API)
 
 `UploadsModule` ที่ CLI gen ให้ ไม่ต้องแก้ แก้เฉพาะ controller:
@@ -1326,6 +1338,7 @@ export class UploadsController {
 
 ---
 
+<a id="step-12"></a>
 ## Step 12 รัน และทดสอบ Backend
 
 ```bash
@@ -1378,6 +1391,7 @@ curl -X DELETE http://localhost:3001/tags/1
 
 ---
 
+<a id="step-13"></a>
 ## Step 13 Frontend (Next.js + Tailwind + src dir)
 
 ### 13.1 สร้างโปรเจกต์ Next.js (Tailwind + `src/`)
@@ -2341,6 +2355,7 @@ cd frontend && npm run dev           # http://localhost:3000
 
 ---
 
+<a id="step-14"></a>
 ## Step 14 Checklist ทดสอบทั้งระบบ
 
 | # | ทดสอบ | ผลที่ควรได้ |
